@@ -49,6 +49,11 @@ IB_DESIGNABLE
 @property (nonatomic, strong, readonly) UILabel * floatingLabel;
 
 /**
+ * Applied `floatingLabelInvalidTextColor` when true and the field is not a first responder
+ */
+@property (nonatomic) BOOL hasInvalidInput;
+
+/**
  * Padding to be applied to the y coordinate of the floating label upon presentation.
  * Defaults to zero.
  */
@@ -85,6 +90,12 @@ IB_DESIGNABLE
  * Tint color is used by default if an `floatingLabelActiveTextColor` is not provided.
  */
 @property (nonatomic, strong) IBInspectable UIColor * floatingLabelActiveTextColor;
+
+/**
+ * Text color to be applied to the floating label while the field has `invalidInput`.
+ * The effect is disabled if an `floatingLabelInvalidTextColor` is not provided.
+ */
+@property (nonatomic, strong) IBInspectable UIColor * floatingLabelInvalidTextColor;
 
 /**
  * Indicates whether the floating label's appearance should be animated regardless of first responder status.

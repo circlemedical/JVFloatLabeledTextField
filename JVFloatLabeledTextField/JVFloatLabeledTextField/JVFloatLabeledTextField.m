@@ -117,6 +117,16 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
     return [UIColor blueColor];
 }
 
+- (UIColor *)labelInvalidColor
+{
+    if (_floatingLabelInvalidTextColor) {
+        return  _floatingLabelInvalidTextColor;
+    }
+    else {
+        return [self labelActiveColor];
+    }
+}
+
 - (void)setFloatingLabelFont:(UIFont *)floatingLabelFont
 {
     if (floatingLabelFont != nil) {
@@ -337,8 +347,10 @@ static CGFloat const kFloatingLabelHideAnimationDuration = 0.3f;
                                       floatingLabelSize.height);
     
     BOOL firstResponder = self.isFirstResponder;
+    BOOL hasInvalidInput = self.hasInvalidInput;
     _floatingLabel.textColor = (firstResponder && self.text && self.text.length > 0 ?
                                 self.labelActiveColor : self.floatingLabelTextColor);
+    if ((!firstResponder && hasInvalidInput)) { _floatingLabel.textColor = self.labelInvalidColor; }
     if ((!self.text || 0 == [self.text length]) && !self.alwaysShowFloatingLabel) {
         [self hideFloatingLabel:firstResponder];
     }
